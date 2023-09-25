@@ -1,9 +1,9 @@
 {
   "name": "enchantment-api",
-  "module": "index.ts",
+  "module": "index.js",
   "type": "module",
   "scripts": {
-    "start":"bun run index.ts"
+    "start":"bun --hot run index.js"
   },
   "devDependencies": {
     "bun-types": "latest"
