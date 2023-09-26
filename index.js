@@ -1,3 +1,5 @@
+const responseBuilder = require('./util/responsebuilder.js');
+
 const server = Bun.serve({
     port: 8080,
     development: true,
@@ -9,15 +11,15 @@ const server = Bun.serve({
       //Pathname: /magic
       const {pathname} = new URL(url);
       if(pathname == "/enchantments" && method == "GET") {
-        return new Response(JSON.stringify("All enchantments"),{status: 200});
+        return responseBuilder.buildSimpleResponse("All Enchantments: Yes",200);
       }
 
       if(pathname == "/enchantments/name" && method == "GET") {
-        return new Response("All enchantments by name");
+        return responseBuilder.buildSimpleResponse("All enchantments by name",200);
       }
 
       if(pathname == "/enchantments/weapon" && method == "GET") {
-        return new Response("All enchantments by weapon");
+        return responseBuilder.buildSimpleResponse("All enchantments by weapon",200);
       }
 
       return new Response("", {status: 404});
