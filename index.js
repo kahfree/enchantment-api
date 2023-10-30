@@ -1,4 +1,6 @@
 import Enchantment from './models/enchantment';
+import Item from './models/item';
+import ItemHasEnchantment from './models/itemHasEnchantment';
 const responseBuilder = require('./util/responsebuilder.js');
 const enchantments = [
   new Enchantment('Fire Aspect', 'Weapon', 'Sets your enemies on fire', 3),
@@ -6,6 +8,20 @@ const enchantments = [
   new Enchantment('Feather Falling', 'Boots', 'Reduces fall damage', 4),
   new Enchantment('Sharpness', 'Weapon', 'Increases attack damage', 5),
   new Enchantment('Respiration', 'Helmet', 'Allows longer underwater breathing', 3),
+];
+const dummyData = [
+  new Item('Diamond Sword', 'Weapon'),
+  new Item('Iron Pickaxe', 'Tool'),
+  new Item('Golden Apple', 'Consumable'),
+  new Item('Ender Pearl', 'Resource'),
+  new Item('Redstone Dust', 'Resource'),
+];
+const enchantmentData = [
+  new ItemHasEnchantment('Diamond Sword', 'Sharpness'),
+  new ItemHasEnchantment('Iron Pickaxe', 'Efficiency'),
+  new ItemHasEnchantment('Golden Apple', 'Protection'),
+  new ItemHasEnchantment('Ender Pearl', 'Unbreaking'),
+  new ItemHasEnchantment('Redstone Dust', 'Fortune'),
 ];
 const server = Bun.serve({
     port: 8080,
@@ -22,8 +38,12 @@ const server = Bun.serve({
         const enchantmentStrings = enchantments.map(enchantment => enchantment.toString());
 
         // Combine the array of strings into a single string
+        console.log(dummyData);
+        console.log(enchantmentData);
         const combinedEnchantments = enchantmentStrings.join('\n');
         return responseBuilder.buildSimpleResponse(combinedEnchantments,200);
+        console.log(dummyData);
+        console.log(enchantmentData);
       }
 
       if(pathname == "/enchantments/name" && method == "GET") {
