@@ -1,6 +1,7 @@
 import Enchantment from './models/enchantment';
 import Item from './models/item';
 import ItemHasEnchantment from './models/itemHasEnchantment';
+import {Database} from "bun:sqlite"
 const responseBuilder = require('./util/responsebuilder.js');
 const enchantments = [
   new Enchantment('Fire Aspect', 'Weapon', 'Sets your enemies on fire', 3),
@@ -23,6 +24,9 @@ const enchantmentData = [
   new ItemHasEnchantment('Ender Pearl', 'Unbreaking'),
   new ItemHasEnchantment('Redstone Dust', 'Fortune'),
 ];
+
+const db = new Database(":memory:");
+const query = db.query("select 'Hello world' as message;");
 const server = Bun.serve({
     port: 8080,
     development: true,
@@ -41,6 +45,7 @@ const server = Bun.serve({
         console.log(dummyData);
         console.log(enchantmentData);
         const combinedEnchantments = enchantmentStrings.join('\n');
+        console.log(query.get());
         return responseBuilder.buildSimpleResponse(combinedEnchantments,200);
         console.log(dummyData);
         console.log(enchantmentData);
