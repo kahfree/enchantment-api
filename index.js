@@ -1,7 +1,9 @@
 import Enchantment from './models/enchantment';
 import Item from './models/item';
 import ItemHasEnchantment from './models/itemHasEnchantment';
-import {Database} from "bun:sqlite"
+
+import MyDatabase from './database';
+const db = new MyDatabase("mydb.sqlite");
 const responseBuilder = require('./util/responsebuilder.js');
 const enchantments = [
   new Enchantment('Fire Aspect', 'Weapon', 'Sets your enemies on fire', 3),
@@ -25,8 +27,16 @@ const enchantmentData = [
   new ItemHasEnchantment('Redstone Dust', 'Fortune'),
 ];
 
-const db = new Database(":memory:");
-const query = db.query("select 'Hello world' as message;");
+// const insertDataQuery = 'INSERT INTO enchantment (type, description, name, max_level) VALUES (?,?,?,?)';
+// const userData = ['melee','does fire damage', 'fire aspect', 5];
+// db.insertData(insertDataQuery, userData);
+const readDataQuery = 'SELECT * FROM enchantment';
+const data = db.getAllData(readDataQuery);
+console.log(data);
+const row = db.getByName('fire aspect','enchantment');
+console.log(row.name);
+db.close();
+
 const server = Bun.serve({
     port: 8080,
     development: true,
