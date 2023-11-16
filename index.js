@@ -2,16 +2,23 @@ import Enchantment from './models/enchantment';
 import Item from './models/item';
 import ItemHasEnchantment from './models/itemHasEnchantment';
 
-import MyDatabase from './database';
-const db = new MyDatabase("mydb.sqlite");
+import EnchantmentRepo from './EnchantmentRepo'
+const repo = new EnchantmentRepo();
+
+
+// var insert = await repo.addEnchantment();
+// console.log(insert);
+
+var id = repo.getByEnchantmentName('test name')[0][0];
+console.log(id);
+// await repo.updateEnchantmentType('new type', 2);
+await repo.deleteEnchantment('test name');
+var results = repo.getAllEnchantments();
+console.log(results);
+// var result = repo.getByEnchantmentName('test name');
+// console.log(result);
+
 const responseBuilder = require('./util/responsebuilder.js');
-const enchantments = [
-  new Enchantment('Fire Aspect', 'Weapon', 'Sets your enemies on fire', 3),
-  new Enchantment('Protection', 'Armor', 'Reduces incoming damage', 4),
-  new Enchantment('Feather Falling', 'Boots', 'Reduces fall damage', 4),
-  new Enchantment('Sharpness', 'Weapon', 'Increases attack damage', 5),
-  new Enchantment('Respiration', 'Helmet', 'Allows longer underwater breathing', 3),
-];
 const dummyData = [
   new Item('Diamond Sword', 'Weapon'),
   new Item('Iron Pickaxe', 'Tool'),
@@ -30,12 +37,12 @@ const enchantmentData = [
 // const insertDataQuery = 'INSERT INTO enchantment (type, description, name, max_level) VALUES (?,?,?,?)';
 // const userData = ['melee','does fire damage', 'fire aspect', 5];
 // db.insertData(insertDataQuery, userData);
-const readDataQuery = 'SELECT * FROM enchantment';
-const data = db.getAllData(readDataQuery);
-console.log(data);
-const row = db.getByName('fire aspect','enchantment');
-console.log(row.name);
-db.close();
+// const readDataQuery = 'SELECT * FROM enchantment';
+// const data = db.getAllData(readDataQuery);
+// console.log(data);
+// const row = db.getByName('fire aspect','enchantment');
+// console.log(row.name);
+// db.close();
 
 const server = Bun.serve({
     port: 8080,
@@ -49,16 +56,7 @@ const server = Bun.serve({
       const {pathname} = new URL(url);
       if(pathname == "/enchantments" && method == "GET") {
         // Use map() to get an array of string representations
-        const enchantmentStrings = enchantments.map(enchantment => enchantment.toString());
-
-        // Combine the array of strings into a single string
-        console.log(dummyData);
-        console.log(enchantmentData);
-        const combinedEnchantments = enchantmentStrings.join('\n');
-        console.log(query.get());
-        return responseBuilder.buildSimpleResponse(combinedEnchantments,200);
-        console.log(dummyData);
-        console.log(enchantmentData);
+        return responseBuilder.buildSimpleResponse('404 add the db',200);
       }
 
       if(pathname == "/enchantments/name" && method == "GET") {
