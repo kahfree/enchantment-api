@@ -1,4 +1,5 @@
 import {Database} from "bun:sqlite";
+import { drizzle } from 'drizzle-orm/bun-sqlite';
 // const db = new Database("mydb.sqlite");
 
 class MyDatabase {

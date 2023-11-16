@@ -3,12 +3,16 @@
   "module": "index.js",
   "type": "module",
   "scripts": {
-    "start":"bun --hot run index.js"
+    "start": "bun --hot run index.js"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "^0.20.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.29.0"
   }
 }
