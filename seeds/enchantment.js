@@ -1,5 +1,5 @@
-import { db } from "../db/db";
-import { enchantment } from "../models/enchantment";
+import db from "../db/db";
+import enchantment from "../models/enchantment";
 
 await db.insert(enchantment).values([
   {

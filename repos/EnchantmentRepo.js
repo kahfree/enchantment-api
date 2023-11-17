@@ -1,8 +1,8 @@
 import { Database } from 'bun:sqlite';
 import { drizzle } from 'drizzle-orm/bun-sqlite';
 import { eq } from 'drizzle-orm';
-import enchantment from './models/enchantment';
-import db  from "./db/db";
+import enchantment from '../models/enchantment';
+import db  from "../db/db";
 class EnchantmentRepo {
     constructor() {
 
@@ -48,7 +48,7 @@ class EnchantmentRepo {
     }
 
     // Update Enchantment Description
-    async updateEnchantmentType(newDesc, id){
+    async updateEnchantmentDesc(newDesc, id){
         await db.update(enchantment)
         .set({description: newDesc})
         .where(eq(enchantment.id,id));

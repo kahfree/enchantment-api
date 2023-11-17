@@ -1,12 +1,7 @@
-class Item {
-    constructor(name, type){
-        this.name = name;
-        this.type = type;
-    }
-
-    toString() {
-        return `Name: ${this.name}, Type: ${this.type}`;
-    }
-
-}
-export default Item;
+import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
+const item = sqliteTable('item', {
+    id: integer('id').primaryKey(),
+    name: text('name'),
+    type: text('type')
+  });
+export default item;
