@@ -1,4 +1,4 @@
-import EnchantmentRepo from './EnchantmentRepo'
+import EnchantmentRepo from '../repos/EnchantmentRepo'
 class EnchantmentServiceWrapper {
     constructor() {
         this.repo = new EnchantmentRepo();

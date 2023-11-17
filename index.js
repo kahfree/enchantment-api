@@ -1,24 +1,9 @@
-import Enchantment from './models/enchantment';
-import Item from './models/item';
-import ItemHasEnchantment from './models/itemHasEnchantment';
-
-import EnchantmentRepo from './EnchantmentRepo'
-import EnchantmentServiceWrapper from './EnchantmentServiceWrapper';
-// const repo = new EnchantmentRepo();
+import EnchantmentServiceWrapper from './servicewrappers/EnchantmentServiceWrapper';
+import ItemServiceWrapper from './servicewrappers/ItemServiceWrapper';
 const enchantSW = new EnchantmentServiceWrapper();
+const itemSW = new ItemServiceWrapper();
 
-// var insert = await repo.addEnchantment();
-// console.log(insert);
-
-// var id = repo.getByEnchantmentName('fire aspect')[0][0];
-// console.log(id);
-// // await repo.updateEnchantmentType('new type', 2);
-// await repo.deleteEnchantment('test name');
-// var results = repo.getAllEnchantments();
-// console.log(results);
-// // var result = repo.getByEnchantmentName('test name');
-// // console.log(result);
-
+console.log(itemSW.getAllEnchantments());
 const responseBuilder = require('./util/responsebuilder.js');
 
 const server = Bun.serve({
