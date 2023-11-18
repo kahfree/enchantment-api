@@ -1,5 +1,6 @@
 import db from "../db/db";
 import item from "../models/item";
+import {eq} from 'drizzle-orm';
 
 await db.insert(item).values([
   {
@@ -63,5 +64,5 @@ await db.insert(item).values([
     type: "Tool"
   },
 ]);
-
+// await db.delete(item).where(eq(item.id,16));
 console.log(`Seeding complete.`);
