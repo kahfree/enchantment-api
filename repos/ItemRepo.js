@@ -43,8 +43,8 @@ class ItemRepo {
         .where(eq(item.id,id));
     }
 
-    async deleteItem(itemName){
-        await db.delete(item).where(eq(item.name,itemName));
+    async deleteItem(itemID){
+        await db.delete(item).where(eq(item.id,itemID));
     }
   
     // Other methods specific to the "enchantment" table can be added here
