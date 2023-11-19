@@ -1,8 +1,9 @@
 import EnchantmentServiceWrapper from './servicewrappers/EnchantmentServiceWrapper';
 import ItemServiceWrapper from './servicewrappers/ItemServiceWrapper';
+import ItemHasEnchantmentServiceWrapper from './servicewrappers/ItemHasEnchantmentServiceWrapper';
 const enchantSW = new EnchantmentServiceWrapper();
 const itemSW = new ItemServiceWrapper();
-
+const itemHasEnchantmentSW = new ItemHasEnchantmentServiceWrapper();
 console.log(itemSW.getAllEnchantments());
 const responseBuilder = require('./util/responsebuilder.js');
 
@@ -32,8 +33,15 @@ const server = Bun.serve({
         return responseBuilder.buildSimpleJSONResponse(test,200);
       }
 
-      if(pathname == "/enchantments/weapon" && method == "GET") {
-        return responseBuilder.buildSimpleResponse("All enchantments by weapon",200);
+      if(pathname.includes("/enchantments/item") && method == "GET"){
+        const itemName = pathname.split("/").pop();
+        console.log("Item Name:", itemName);
+        // let test = enchantSW.getEnchantmentsByName(enchantmentName);
+        let newyolk = itemHasEnchantmentSW.getEnchantmentNamesByItem(itemName);
+        console.log(newyolk);
+        let thegoodstuff = enchantSW.getEnchantmentsFromNames(newyolk);
+        console.log(thegoodstuff);
+        return responseBuilder.buildSimpleJSONResponse(thegoodstuff,200);
       }
 
       return new Response("", {status: 404});
