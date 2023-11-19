@@ -1,6 +1,6 @@
 import { Database } from 'bun:sqlite';
 import { drizzle } from 'drizzle-orm/bun-sqlite';
-import { eq } from 'drizzle-orm';
+import { eq, like, ilike } from 'drizzle-orm';
 import enchantment from '../models/enchantment';
 import db  from "../db/db";
 class EnchantmentRepo {
@@ -58,6 +58,9 @@ class EnchantmentRepo {
         await db.delete(enchantment).where(eq(enchantment.name,enchantmentName));
     }
   
+    getEnchantmentsByName(name){
+        return db.select().from(enchantment).where(like(enchantment.name,"%"+name+"%")).values();
+    }
     // Other methods specific to the "enchantment" table can be added here
   }
   class Enchantment {

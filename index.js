@@ -10,6 +10,7 @@ const server = Bun.serve({
     port: 8080,
     development: true,
     fetch(req) {
+      try{
       console.log(req);
       //URL: http://localhost:8080/magic
       //Method: GET
@@ -20,11 +21,15 @@ const server = Bun.serve({
         // Use map() to get an array of string representations
         let results = enchantSW.getAllEnchantments();
         console.log(results);
-        return responseBuilder.buildSimpleResponse(JSON.stringify(results),200);
+        return responseBuilder.buildSimpleJSONResponse(results,200);
       }
 
-      if(pathname == "/enchantments/name" && method == "GET") {
-        return responseBuilder.buildSimpleResponse("All enchantments by name",200);
+      if(pathname.includes("/enchantments/name") && method == "GET"){
+        const enchantmentName = pathname.split("/").pop();
+        console.log("Enchantment Name:", enchantmentName);
+        let test = enchantSW.getEnchantmentsByName(enchantmentName);
+        console.log(test);
+        return responseBuilder.buildSimpleJSONResponse(test,200);
       }
 
       if(pathname == "/enchantments/weapon" && method == "GET") {
@@ -32,6 +37,9 @@ const server = Bun.serve({
       }
 
       return new Response("", {status: 404});
+    }catch(error){
+      console.log(error);
+    }
     },
   });
   

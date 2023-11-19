@@ -7,6 +7,10 @@ class EnchantmentServiceWrapper {
     getAllEnchantments(){
         return this.repo.getAllEnchantments();
     }
+
+    getEnchantmentsByName(name){
+        return this.repo.getEnchantmentsByName(name);
+    }
   }
   
   export default EnchantmentServiceWrapper;
