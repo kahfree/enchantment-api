@@ -11,6 +11,15 @@ class EnchantmentServiceWrapper {
     getEnchantmentsByName(name){
         return this.repo.getEnchantmentsByName(name);
     }
+
+    getEnchantmentsFromNames(names){
+        let enchantments = [];
+        names.forEach(name => {
+            let enchant = this.repo.getByEnchantmentName(name)[0];
+            enchantments.push(enchant);
+        })
+        return enchantments;
+    }
   }
   
   export default EnchantmentServiceWrapper;

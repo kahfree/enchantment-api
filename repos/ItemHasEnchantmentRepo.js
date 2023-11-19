@@ -46,6 +46,10 @@ class ItemHasEnchantmentRepo {
     async deleteItem(enchantmentName){
         await db.delete(itemHasEnchantment).where(eq(itemHasEnchantment.enchantmentName,enchantmentName));
     }
+
+    getEnchantmentNamesByItem(item){
+        return db.select({enchantmentName: itemHasEnchantment.enchantmentName}).from(itemHasEnchantment).where(eq(itemHasEnchantment.itemType,item)).values();
+    }
   
     // Other methods specific to the "enchantment" table can be added here
   }
