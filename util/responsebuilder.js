@@ -9,6 +9,18 @@ function buildSimpleResponse(body,status){
         });
 }
 
+function buildSimpleJSONResponse(body,status){
+    return new Response(
+        JSON.stringify(body),
+        {
+            status: status,
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+}
+
 module.exports = {
-    buildSimpleResponse
+    buildSimpleResponse,
+    buildSimpleJSONResponse
 }

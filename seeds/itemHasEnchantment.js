@@ -1,6 +1,5 @@
 import db from "../db/db";
 import itemHasEnchantment from "../models/itemHasEnchantment";
-import {eq} from 'drizzle-orm';
 
 await db.insert(itemHasEnchantment).values([
   {
@@ -28,5 +27,5 @@ await db.insert(itemHasEnchantment).values([
     enchantmentName: "Aqua Affinity"
   },
 ]);
-// await db.delete(itemHasEnchantment).where(eq(itemHasEnchantment,16));
+
 console.log(`Seeding complete.`);
